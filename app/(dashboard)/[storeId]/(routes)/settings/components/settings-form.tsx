@@ -6,7 +6,6 @@ import { Store } from "@prisma/client";
 
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import Heading from "@/components/ui/Heading";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -23,6 +22,9 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import AlertModal from "@/components/modals/alert-modal";
+import { ApiAlert } from "@/components/ui/api-alert";
+import Heading from "@/components/ui/heading";
+import { useOrigin } from "@/hooks/use-origin";
 
 interface SettingsFormProps {
   initialData: Store;
@@ -37,6 +39,7 @@ type SettingFormValues = z.infer<typeof formSchema>;
 const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
   const params = useParams();
   const router = useRouter();
+  const origin = useOrigin();
 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -126,6 +129,12 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
           </Button>
         </form>
       </Form>
+      <Separator />
+      <ApiAlert
+        title="NEXT_PUBLIC_API_URL"
+        description={`${origin}/api/${params.storeId}`}
+        variant="public"
+      />
     </>
   );
 };

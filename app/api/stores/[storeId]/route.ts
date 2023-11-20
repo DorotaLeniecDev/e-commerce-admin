@@ -42,9 +42,6 @@ export async function DELETE(req: Request, { params }: { params: { storeId: stri
   try {
     const { userId } = auth();
 
-
-
-
     if (!params.storeId) {
       return new NextResponse("Store ID is required", { status: 400 })
     }
