@@ -7,7 +7,7 @@ export async function GET(req: Request, { params }: { params: { sizeId: string }
   try {
 
     if (!params.sizeId) {
-      return new NextResponse("Billboard ID is required", { status: 400 })
+      return new NextResponse("Size ID is required", { status: 400 })
     }
 
     const size = await prismadb.size.findUnique({
