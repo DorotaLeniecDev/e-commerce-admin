@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { SizeColumn } from "./columns";
+import { ColorColumn } from "./columns";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +17,7 @@ import axios from "axios";
 import AlertModal from "@/components/modals/alert-modal";
 
 interface CellActionProps {
-  data: SizeColumn;
+  data: ColorColumn;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
