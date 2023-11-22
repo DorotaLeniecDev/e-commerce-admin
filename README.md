@@ -14,16 +14,4 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## Prisma DB
-
-### resetting
-
-```npx prisma migrate reset```
-
-### pushing
-
-```npx prisma generate ```
-
-```npx prisma db push```
+https://e-commerce-admin-4vw73nzme-dorotaleniecdev.vercel.app/
