@@ -14,4 +14,4 @@ pnpm dev
 bun dev
 ```
 
-https://e-commerce-admin-4vw73nzme-dorotaleniecdev.vercel.app/
+https://e-commerce-admin-pi-one.vercel.app/
