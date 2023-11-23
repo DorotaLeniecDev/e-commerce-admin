@@ -3,17 +3,20 @@ import { auth } from "@clerk/nextjs"
 import { NextResponse } from "next/server"
 
 
-export async function GET(req: Request, { params }: { params: { categoruId: string } }) {
+export async function GET(req: Request, { params }: { params: { categoryId: string } }) {
   try {
 
-    if (!params.categoruId) {
+    if (!params.categoryId) {
       return new NextResponse("Category ID is required", { status: 400 })
     }
 
     const category = await prismadb.category.findUnique({
       where: {
-        id: params.categoruId,
+        id: params.categoryId,
       },
+      include: {
+        billboard: true
+      }
     })
 
     return NextResponse.json(category)
