@@ -1,7 +1,7 @@
 import prismadb from "@/lib/prismadb";
 
 export const getStockCount = async (storeId: string) => {
-  const salesCount = await prisma?.product.count({
+  const salesCount = await prismadb?.product.count({
     where: {
       storeId,
       isArchived: false,
