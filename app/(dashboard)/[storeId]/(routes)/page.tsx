@@ -1,5 +1,19 @@
+import { getSalesCount } from "@/actions/get-sales-count";
+import { getStockCount } from "@/actions/get-stock-count";
+import { getTotalRevenue } from "@/actions/get-total-revenue";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Heading from "@/components/ui/heading";
+import { Separator } from "@/components/ui/separator";
 import prismadb from "@/lib/prismadb";
-import { Wrench } from "lucide-react";
+import { formatter } from "@/lib/utils";
+import {
+  Box,
+  CreditCard,
+  DollarSign,
+  Package,
+  ShoppingCart,
+  Wrench,
+} from "lucide-react";
 import Link from "next/link";
 
 interface DashboardPageProps {
@@ -13,17 +27,55 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
     },
   });
 
+  const totalReveue = (await getTotalRevenue(params.storeId)) as
+    | number
+    | undefined;
+  const salesCount = await getSalesCount(params.storeId);
+  const stockCount = await getStockCount(params.storeId);
+
   return (
-    <div className="flex flex-col items-center justify-center h-full">
-      <div className="flex gap-4"></div>
-      <Wrench className="h-10 w-10" />
-      In construction...
-      <span className="block">
-        Check other{" "}
-        <Link className="font-bold" href={`/${params.storeId}/billboards`}>
-          pages
-        </Link>
-      </span>
+    <div className="flex flex-col">
+      <div className="flex-1 space-y-4 p-8 pt-6">
+        <Heading title="Dashboard" description="Store overview" />
+        <Separator />
+        <div className="grid gap-4 grid-cols-3">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Total Revenue
+              </CardTitle>
+              <DollarSign className="h-4 w-f text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {formatter.format(totalReveue!)}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Sales</CardTitle>
+              <CreditCard className="h-4 w-f text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{salesCount}</div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Products in Stock
+              </CardTitle>
+              <Package className="h-4 w-f text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stockCount}</div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 };
