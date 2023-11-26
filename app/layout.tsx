@@ -7,6 +7,7 @@ import { ModalProvider } from "@/providers/modal-provider";
 import "./globals.css";
 import { ToastesProvider } from "@/providers/toast-provider";
 import Script from "next/script";
+import { ThemeProvider } from "@/providers/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,9 +35,11 @@ export default function RootLayout({
         `}
         </Script>
         <body className={inter.className}>
-          <ToastesProvider />
-          <ModalProvider />
-          {children}
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <ToastesProvider />
+            <ModalProvider />
+            {children}
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
