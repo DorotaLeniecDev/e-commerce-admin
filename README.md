@@ -15,3 +15,6 @@ bun dev
 ```
 
 https://e-commerce-admin-pi-one.vercel.app/
+
+## How to
+
